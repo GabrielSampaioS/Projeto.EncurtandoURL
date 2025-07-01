@@ -21,6 +21,7 @@
       <tr>
         <th>Original</th>
         <th>Encurtada</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody id="tabela-urls">
@@ -40,6 +41,14 @@
         linha.innerHTML = `
           <td><a href="${url.urlOriginal}" target="_blank">${url.urlOriginal}</a></td>
           <td><a href="/${url.codigoCurto}" target="_blank">${location.host}/${url.codigoCurto}</a></td>
+          <td>
+            <form action="/excluir" method="post" style="display:inline;">
+              <input type="hidden" name="codigoCurto" value="${url.codigoCurto}">
+              <button type="submit" class="btn-excluir" title="Excluir" style="background:none;border:none;cursor:pointer;font-size:18px;color:#e74c3c;">
+                &#10006;
+              </button>
+            </form>
+          </td>
         `;
         tabela.appendChild(linha);
       });

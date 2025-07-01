@@ -88,4 +88,22 @@ module.exports = class UrlController {
             res.status(500).send('Erro aqui');
         }
     }
+
+static async excluirUrl(req, res) {
+    // Para POST: req.body.codigoCurto
+    // Para rota DELETE: req.params.codigoCurto
+    const codigoCurto = req.body.codigoCurto
+    
+
+    try {
+        const resultado = await UrlModel.deleteOne({ codigoCurto });
+        if (resultado.deletedCount === 0) {
+            return res.status(404).send('URL não encontrada');
+        }
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Erro ao excluir');
+    }
+}
 }
