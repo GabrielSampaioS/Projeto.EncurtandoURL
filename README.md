@@ -74,12 +74,13 @@ Projeto.EncurtandoURL/
 
 ## 📌 Endpoints da API
 
-| Método | Rota             | Descrição                             |
+| Método | Rota             | Descrição                              |
 |--------|------------------|----------------------------------------|
 | GET    | `/`              | Página inicial                         |
 | POST   | `/encurtar`      | Encurta uma URL                        |
 | GET    | `/lista`         | Retorna todas as URLs encurtadas       |
 | GET    | `/:codigoCurto`  | Redireciona para a URL original        |
+| GET    | `/excluir`       | Deletar URL do NoSql                   |
 
 ---
 
