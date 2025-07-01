@@ -8,7 +8,7 @@ module.exports = class UrlController {
     // Serve a página inicial
     static Page(req, res) {
         //Fazer:
-            //Incluir exibição do histórico de URLs encurtadas 
+        //Incluir exibição do histórico de URLs encurtadas 
 
         res.sendFile(path.join(__dirname, '../public/index.html'));
 
@@ -17,26 +17,19 @@ module.exports = class UrlController {
     //Gera URL encurtada
     static async encurtar(req, res) {
         const { urlOriginal } = req.body;
-        
+
         //ZOD    
 
-        if(!urlOriginal || typeof urlOriginal !== 'string'){
+        if (!urlOriginal || typeof urlOriginal !== 'string') {
             return res.status(400).send('URL inválida');
         }
 
-        try{
+        try {
             //varificar se já existe
-            const existe = await UrlModel.findOne({urlOriginal});
-            if(existe){
+            const existe = await UrlModel.findOne({ urlOriginal });
+            if (existe) {
                 return res.send(`URL já encurtada ${req.headers.host}/${existe.codigoCurto}`)
             }
-        
-            //Gerar url encurtada
-                //Podemos fazer de varias formas
-                    // Math.random pode ter comflito
-                    // id incremento
-                    // UUid
-                    // shoterId
 
             const codigoCurto = shoterId.generate();
 
@@ -49,9 +42,9 @@ module.exports = class UrlController {
 
             await novaUrl.save();
 
-            res.send(`URL encurtada: ${req.headers.host}/${codigoCurto}`);
+            res.redirect('/');
 
-        }catch(err){
+        } catch (err) {
             console.error(err);
             res.status(500).send('Erro interno')
         }
@@ -59,30 +52,30 @@ module.exports = class UrlController {
     }
 
     // Redireciona para a URL original
-    static async redirecionar(req, res){
-        const {codigoCurto} = req.params
-        try{
-            const encontrado = await UrlModel.findOne({codigoCurto})
+    static async redirecionar(req, res) {
+        const { codigoCurto } = req.params
+        try {
+            const encontrado = await UrlModel.findOne({ codigoCurto })
 
-            if(!encontrado){
+            if (!encontrado) {
                 return res.status(400).send('URL não encontrada');
             }
-            
-            
+
             res.redirect(encontrado.urlOriginal);
 
-        }catch(err){
+        } catch (err) {
             console.error(err);
             res.status(500).send('Erro interno')
         }
 
     }
+    // Lista todas as URLs encurtadas
 
     static async lista(req, res) {
-       
+
         try {
             const retorno = await UrlModel.find();
-            
+
             //Limpa os dados
             const dadosLimpos = retorno.map(url => ({
                 urlOriginal: url.urlOriginal,
@@ -91,7 +84,7 @@ module.exports = class UrlController {
 
             res.json(dadosLimpos);
         } catch (err) {
-            
+
             res.status(500).send('Erro aqui');
         }
     }
