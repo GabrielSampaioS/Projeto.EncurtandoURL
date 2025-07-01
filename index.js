@@ -1,6 +1,7 @@
 // =======================
 // Importação de módulos
-// =======================
+// ======================= 
+/*Qual é a diferença de import e require ?  */
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -12,6 +13,9 @@ const path = require('path');
 // =======================
 const app = express();
 app.use(cors());
+app.use(express.urlencoded({
+  extended: true                                                    //Pegar informações do formualrio HTML
+}));
 app.use(express.json());
 
 // =======================
@@ -23,12 +27,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Importação dos Controllers 
 // =======================
 
-const urlControllers = require('./controllers/UrlController')
+const urlControllers = require('./controllers/UrlController');
 
 // =======================
 // Rotas
 // =======================
-app.get('/', urlControllers.Page)
+  //app.get('/', urlControllers.Page)
+  //app.post('/', urlControllers.PagePost);
+  //QUal é a difernça de route e {reoute} ?
+const route = require('./routes/urlRoutes');
+app.use(route)
 
 // =======================
 // Conexão com o banco de dados
@@ -44,7 +52,7 @@ mongoose.connect(uri, {
   const PORT = process.env.PORT || 3000;
   
   app.listen(PORT, () => {
-    console.log(`Servidor rodando na por₢ta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
     console.log(`Conectado ao MongoDB: ${uri}`);
   });
 })
