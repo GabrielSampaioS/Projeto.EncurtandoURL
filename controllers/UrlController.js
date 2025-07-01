@@ -28,7 +28,8 @@ module.exports = class UrlController {
             //varificar se já existe
             const existe = await UrlModel.findOne({ urlOriginal });
             if (existe) {
-                return res.send(`URL já encurtada ${req.headers.host}/${existe.codigoCurto}`)
+                return res.redirect(`/?msg=${encodeURIComponent(`URL já encurtada: ${req.headers.host}/${existe.codigoCurto}`)}`);
+
             }
 
             const codigoCurto = shoterId.generate();
@@ -89,21 +90,21 @@ module.exports = class UrlController {
         }
     }
 
-static async excluirUrl(req, res) {
-    // Para POST: req.body.codigoCurto
-    // Para rota DELETE: req.params.codigoCurto
-    const codigoCurto = req.body.codigoCurto
-    
+    static async excluirUrl(req, res) {
+        // Para POST: req.body.codigoCurto
+        // Para rota DELETE: req.params.codigoCurto
+        const codigoCurto = req.body.codigoCurto
 
-    try {
-        const resultado = await UrlModel.deleteOne({ codigoCurto });
-        if (resultado.deletedCount === 0) {
-            return res.status(404).send('URL não encontrada');
+
+        try {
+            const resultado = await UrlModel.deleteOne({ codigoCurto });
+            if (resultado.deletedCount === 0) {
+                return res.status(404).send('URL não encontrada');
+            }
+            res.redirect('/');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Erro ao excluir');
         }
-        res.redirect('/');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Erro ao excluir');
     }
-}
 }

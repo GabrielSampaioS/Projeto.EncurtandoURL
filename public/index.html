@@ -7,6 +7,8 @@
 </head>
 <body>
   <h1>Encurtador de URL</h1>
+  <div id="mensagem" style="color: green; margin-bottom: 15px;"></div>
+
 
   <form action="/encurtar" method="POST">
     <input type="text" name="urlOriginal" placeholder="Cole sua URL aqui" required />
@@ -58,6 +60,21 @@
   }
 
   carregarURLs();
+
+  // Função para obter valor de query param
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  const msg = getQueryParam('msg');
+  if (msg) {
+    const divMsg = document.getElementById('mensagem');
+    divMsg.textContent = msg;
+
+    // Opcional: limpar a mensagem da URL para não reaparecer no reload
+    history.replaceState(null, '', window.location.pathname);
+  }
 </script>
 </body>
 </html>
