@@ -3,12 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <title>Encurtador de URL</title>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
   <h1>Encurtador de URL</h1>
+
   <form action="/encurtar" method="POST">
     <input type="text" name="urlOriginal" placeholder="Cole sua URL aqui" required />
     <button type="submit">Encurtar</button>
   </form>
+
+  <hr />
+
+  <h2>URLs Encurtadas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Original</th>
+        <th>Encurtada</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-urls">
+      <!-- Aqui serão inseridas as URLs via JS -->
+    </tbody>
+  </table>
+
+<script>
+  async function carregarURLs() {
+    try {
+      const resposta = await fetch('/lista');
+      const urls = await resposta.json();
+
+      const tabela = document.getElementById('tabela-urls');
+      urls.forEach(url => {
+        const linha = document.createElement('tr');
+        linha.innerHTML = `
+          <td><a href="${url.urlOriginal}" target="_blank">${url.urlOriginal}</a></td>
+          <td><a href="/${url.codigoCurto}" target="_blank">${location.host}/${url.codigoCurto}</a></td>
+        `;
+        tabela.appendChild(linha);
+      });
+    } catch (erro) {
+      console.error('Erro ao carregar URLs:', erro);
+    }
+  }
+
+  carregarURLs();
+</script>
 </body>
 </html>

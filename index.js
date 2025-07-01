@@ -36,7 +36,7 @@ const urlControllers = require('./controllers/UrlController');
   //app.post('/', urlControllers.PagePost);
   //QUal é a difernça de route e {reoute} ?
 const route = require('./routes/urlRoutes');
-app.use(route)
+app.use('/', route)
 
 // =======================
 // Conexão com o banco de dados

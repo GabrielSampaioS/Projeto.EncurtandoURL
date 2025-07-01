@@ -5,6 +5,11 @@ const urlController = require('../controllers/UrlController.js');
 
 route.get('/', urlController.Page);
 route.post('/encurtar', urlController.encurtar);
+
+route.get('/lista', urlController.lista);
+
+/*deixar sempre por ultmo ?*/
 route.get('/:codigoCurto', urlController.redirecionar);
+
 
 module.exports = route;
