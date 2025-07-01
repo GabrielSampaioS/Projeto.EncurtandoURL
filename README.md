@@ -208,11 +208,17 @@ BksQ5qD0Z
 
 ---
 
+## 🎥 Inspiração 
+Este projeto foi inspirado pelo vídeo do canal **[Augusto Galego](https://www.youtube.com/@GutoGalego)**:  
+🔗 [Codando um encurtador de URL na prática](https://youtu.be/gHfpFFA3zIQ)
+
+
+O vídeo serviu como base conceitual e foi adaptado para uma implementação mais personalizada com melhorias e reflexões técnicas sobre estratégias de unicidade de URLs.
+
+
 ## 🙌 Conclusão
 
 Este projeto foi desenvolvido com o objetivo de aprender e aplicar conceitos práticos de back-end com Express e MongoDB. Ele cobre desde o roteamento até o controle de dados persistentes, e apresenta uma base sólida para expansão de funcionalidades.
-
-> Gabriel está aprendendo sobre arquitetura de sistemas e decidiu explorar como diferentes abordagens de geração de identificadores podem influenciar um sistema simples, como um encurtador de URLs. 🚀
 
 ---
 
