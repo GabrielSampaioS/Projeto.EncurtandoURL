@@ -99,9 +99,11 @@ const code = Math.random().toString(36).substring(2, 8);
 
 Exemplo de saida: 
 
+```cmd
 4f3sda
 z8p7lt
 9k1a2b
+```
 
 **⚠️ Não recomendado para produção**
 
@@ -119,11 +121,11 @@ let counter = await getNextSequenceValue();
 - ❌ Escalabilidade comprometida
 
 Exemplo de saida: 
-
+```cmd
 1
 2
 3
-
+```
 
 **✔️ Útil em sistemas controlados ou internos**
 
@@ -141,11 +143,14 @@ const code = uuidv4().substring(0, 8);
 - ❌ Pouco amigável para URLs curtas
 
 UUID completo: 
+```cmd
 b4b52226-c84b-4e41-bba6-4f759894fd5e
+```
 
 Somente 8 primeiros caracteres:
+```cmd
 b4b52226
-
+```
 
 **✔️ Bom para sistemas que priorizam segurança e unicidade**
 
@@ -164,10 +169,11 @@ const codigoCurto = shortid.generate();
 - ❌ [Obsoleto oficialmente](https://github.com/dylang/shortid/issues/133), mas ainda funcional
 
 Exemplo de saida: 
-
+```cmd
 S1Z89D7kz
 rk4DjkL-M
 BksQ5qD0Z
+```
 
 
 **✔️ Ideal para projetos pequenos e MVPs**
